@@ -16,7 +16,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     rev = finalAttrs.version;
     sha256 = "sha256-aFIaVbrGVHV0UpBQSM9FE5LqIkR2KdRuK5hJs1hP+XY=";
     leaveDotGit = true; # for vergen
-    fetchSubmodules = true;
+    fetchSubmodules = true; # for tests
   };
 
   checkFlags = [
