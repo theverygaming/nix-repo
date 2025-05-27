@@ -30,4 +30,12 @@
   lib = import ./lib { inherit pkgs; };
   modules = import ./modules;
   overlays = import ./overlays;
+
+  # VLF tooling
+  ebnaut = pkgs.callPackage ./pkgs/ebnaut { };
+  ebsynth = pkgs.callPackage ./pkgs/ebsynth { };
+  vlfrx-tools = pkgs.callPackage ./pkgs/vlfrx-tools { };
+
+  # fox32 tooling
+  fox32asm = pkgs.callPackage ./pkgs/fox32asm { };
 }
