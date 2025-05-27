@@ -14,9 +14,9 @@ rustPlatform.buildRustPackage (finalAttrs: {
     owner = "fox32-arch";
     repo = "fox32asm";
     rev = finalAttrs.version;
-    sha256 = "";
+    sha256 = "sha256-jLd2jzq8UjPdhNkwdWyAWvFldWU1u7Akgz8rbBeJZ3Q=";
     leaveDotGit = true; # for vergen
   };
 
-  cargoHash = "";
+  cargoHash = "sha256-lPb6hGlAHQh78D1ElL+pznj5P4+BNrOdEZKbbVwrSLU=";
 })
