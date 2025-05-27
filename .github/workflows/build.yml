@@ -32,7 +32,7 @@ on:
     # rebuild everyday
     # TIP: Choose a random time here so not all repositories are build at once:
     # https://www.random.org/clock-times/?num=1&earliest=01%3A00&latest=08%3A00&interval=5&format=html&rnd=new
-    - cron:  '* 12 13 * * *'
+    - cron:  '12 13 * * *'
   workflow_dispatch:
 jobs:
   tests:
