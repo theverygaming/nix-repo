@@ -41,4 +41,8 @@ rec {
 
   cutekit = pkgs.python3Packages.callPackage ./pkgs/cutekit { };
   paper-muncher = pkgs.callPackage ./pkgs/paper-muncher { inherit cutekit; };
+
+  kicadAddons = pkgs.recurseIntoAttrs {
+    jlcpcb-tools = pkgs.kicad.callPackage ./pkgs/kicadAddons/jlcpcb-tools { };
+  };
 }

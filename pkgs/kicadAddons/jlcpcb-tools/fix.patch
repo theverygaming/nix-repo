@@ -1,0 +1,131 @@
+diff --git a/helpers.py b/helpers.py
+index e6f34d3..6872bd4 100644
+--- a/helpers.py
++++ b/helpers.py
+@@ -1,6 +1,5 @@
+ """Contains helper function used all over the plugin."""
+ 
+-from distutils.version import LooseVersion
+ import os
+ from pathlib import Path
+ import re
+@@ -8,26 +7,27 @@ import re
+ import wx  # pylint: disable=import-error
+ import wx.dataview  # pylint: disable=import-error
+ 
++import pcbnew
++
+ PLUGIN_PATH = Path(__file__).resolve().parent
+ 
++# i do not give the slightest fuck anymore
++_global_data_path = str(Path.home() / f".config/kicad/{pcbnew.GetMajorMinorVersion()}/jlcpcb-global-dir-stupid")
++Path(_global_data_path).mkdir(parents=True, exist_ok=True)
++GLOBAL_DATA_PATH = Path(_global_data_path).resolve()
++
+ EXCLUDE_FROM_POS = 2
+ EXCLUDE_FROM_BOM = 3
+ 
+ 
+-def _is_version_in_range(version: str, min_version: str, max_version: str) -> bool:
+-    """Check if version is in range."""
+-    ver = LooseVersion(version)
+-    return LooseVersion(min_version) <= ver < LooseVersion(max_version)
+-
+-
+ def is_version7(version: str) -> bool:
+     """Check if version is 7."""
+-    return _is_version_in_range(version, "6.99", "8.0")
++    return False
+ 
+ 
+ def is_version6(version: str) -> bool:
+     """Check if version is 6."""
+-    return _is_version_in_range(version, "5.99", "7.0")
++    return False
+ 
+ 
+ def getWxWidgetsVersion():
+diff --git a/library.py b/library.py
+index fedf529..79bbd6e 100644
+--- a/library.py
++++ b/library.py
+@@ -19,7 +19,7 @@ from .events import (
+     DownloadStartedEvent,
+     MessageEvent,
+ )
+-from .helpers import PLUGIN_PATH, dict_factory, natural_sort_collation
++from .helpers import GLOBAL_DATA_PATH, dict_factory, natural_sort_collation
+ from .unzip_parts import unzip_parts
+ 
+ 
+@@ -47,7 +47,7 @@ class Library:
+         self.parent = parent
+         self.order_by = "LCSC Part"
+         self.order_dir = "ASC"
+-        self.datadir = os.path.join(PLUGIN_PATH, "jlcpcb")
++        self.datadir = os.path.join(GLOBAL_DATA_PATH, "jlcpcb")
+         self.partsdb_file = os.path.join(self.datadir, "parts-fts5.db")
+         self.rotationsdb_file = os.path.join(self.datadir, "rotations.db")
+         self.mappingsdb_file = os.path.join(self.datadir, "mappings.db")
+diff --git a/mainwindow.py b/mainwindow.py
+index e84dd1f..b1b9931 100644
+--- a/mainwindow.py
++++ b/mainwindow.py
+@@ -7,6 +7,8 @@ import os
+ import re
+ import sys
+ import time
++import shutil
++from pathlib import Path
+ 
+ import pcbnew as kicad_pcbnew
+ import wx  # pylint: disable=import-error
+@@ -34,6 +36,7 @@ from .events import (
+ from .fabrication import Fabrication
+ from .helpers import (
+     PLUGIN_PATH,
++    GLOBAL_DATA_PATH,
+     GetScaleFactor,
+     HighResWxSize,
+     getVersion,
+@@ -868,13 +871,16 @@ class JLCPCBTools(wx.Dialog):
+ 
+     def load_settings(self):
+         """Load settings from settings.json."""
+-        with open(os.path.join(PLUGIN_PATH, "settings.json"), encoding="utf-8") as j:
++        settings_path = Path(os.path.join(GLOBAL_DATA_PATH, "settings.json"))
++        if not settings_path.exists():
++            shutil.copyfile(os.path.join(PLUGIN_PATH, "settings.json"), settings_path)
++        with open(str(settings_path), encoding="utf-8") as j:
+             self.settings = json.load(j)
+ 
+     def save_settings(self):
+         """Save settings to settings.json."""
+         with open(
+-            os.path.join(PLUGIN_PATH, "settings.json"), "w", encoding="utf-8"
++            os.path.join(GLOBAL_DATA_PATH, "settings.json"), "w", encoding="utf-8"
+         ) as j:
+             json.dump(self.settings, j)
+ 
+diff --git a/rotations.py b/rotations.py
+index bc87615..06c547a 100644
+--- a/rotations.py
++++ b/rotations.py
+@@ -9,7 +9,7 @@ import wx  # pylint: disable=import-error
+ import wx.dataview  # pylint: disable=import-error
+ 
+ from .events import PopulateFootprintListEvent
+-from .helpers import PLUGIN_PATH, HighResWxSize, loadBitmapScaled
++from .helpers import GLOBAL_DATA_PATH, HighResWxSize, loadBitmapScaled
+ 
+ 
+ class RotationManagerDialog(wx.Dialog):
+@@ -344,7 +344,7 @@ class RotationManagerDialog(wx.Dialog):
+ 
+     def import_legacy_corrections(self):
+         """Check if corrections in CSV format are found and import them into the database."""
+-        csv_file = os.path.join(PLUGIN_PATH, "corrections", "cpl_rotations_db.csv")
++        csv_file = os.path.join(GLOBAL_DATA_PATH, "corrections", "cpl_rotations_db.csv")
+         if os.path.isfile(csv_file):
+             self._import_corrections(csv_file)
+             os.rename(csv_file, f"{csv_file}.backup")
