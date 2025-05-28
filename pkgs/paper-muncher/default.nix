@@ -128,5 +128,30 @@
 
         runHook postInstall
       '';
+
+      doInstallCheck = true;
+      installCheckPhase = ''
+        runHook preInstallCheck
+
+        TMPDIR=$(mktemp -d)
+
+        cat << EOF > $TMPDIR/test.html
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <title>meow</title>
+        </head>
+        <body>
+        <h1>meeeow</h1>
+        <p>maaaow mrrp :3</p>
+        </body>
+        </html>
+        EOF
+
+        $out/bin/paper-muncher --unsecure print $TMPDIR/test.html -o $TMPDIR/test.pdf
+        grep "Powered By Karm PDF" $TMPDIR/test.pdf
+
+        runHook postInstallCheck
+      '';
     }
   )
