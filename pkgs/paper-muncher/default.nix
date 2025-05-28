@@ -69,14 +69,14 @@
           owner = "skift-org";
           repo = "hideo";
           rev = "f8e944e8cf2156ae4ea575813ace1b2e4f78520c";
-          sha256 = "sha256-0mOfrukMK6x0l/9o8nlDC5akdz+LbfP4+xp8GRT3yhc=";
+          sha256 = "sha256-mE1I02mIgTarvhOiHskclDeSKzEeQK9E9BUwf74kM9c=";
         };
         # hideo depends on karm, but we already have that
         "cute-engineering/cat" = fetchFromGitHub {
           owner = "cute-engineering";
           repo = "cat";
           rev = "v0.10.0";
-          sha256 = "sha256-0mOfrukMK6x0l/9o8nlDC5akdz+LbfP4+xp8GRT3yhc=";
+          sha256 = "sha256-vjsvAfmoUIlwoSefYXuoUjwxFW0htizzqP5V13P7taI=";
         };
       };
     in
