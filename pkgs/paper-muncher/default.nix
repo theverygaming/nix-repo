@@ -104,7 +104,6 @@
         libseccomp
       ];
 
-      # FIXME: skill issue: i did not manage to make cutekit do a seperate build phase... If i do build first, it tries building during install _anyway_
       buildPhase = ''
         runHook preBuild
 
@@ -117,7 +116,7 @@
         ${lib.concatStringsSep "\n" (
           lib.mapAttrsToList (k: v: "ln -s ${v} $CUTEKIT_HOME/.cutekit/extern/${k}") cutekitDeps
         )}
-        # HOME="$CUTEKIT_HOME" IN_NIX_SHELL=":3" cutekit build --release paper-muncher
+        HOME="$CUTEKIT_HOME" IN_NIX_SHELL=":3" cutekit build --release --props:prefix=$out paper-muncher
 
         runHook postBuild
       '';
