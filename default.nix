@@ -26,7 +26,7 @@
   pkgs ? import <nixpkgs> { },
 }:
 
-{
+rec {
   lib = import ./lib { inherit pkgs; };
   modules = import ./modules;
   overlays = import ./overlays;
@@ -38,4 +38,7 @@
 
   # fox32 tooling
   fox32asm = pkgs.callPackage ./pkgs/fox32asm { };
+
+  cutekit = pkgs.python3Packages.callPackage ./pkgs/cutekit { };
+  paper-muncher = pkgs.callPackage ./pkgs/paper-muncher { inherit cutekit; };
 }

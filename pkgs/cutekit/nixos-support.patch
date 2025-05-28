@@ -1,0 +1,15 @@
+diff --git a/cutekit/shell.py b/cutekit/shell.py
+index f4af1da..4308112 100644
+--- a/cutekit/shell.py
++++ b/cutekit/shell.py
+@@ -39,7 +39,9 @@ class Uname:
+ def uname() -> Uname:
+     un = platform.uname()
+ 
+-    if un.system == "Linux" and hasattr(platform, "freedesktop_os_release"):
++    if un.system == "Linux" and ("NIX_STORE" in os.environ or os.path.exists("/nix/store")):
++        distrib = {"NAME": "NixOS"}
++    elif un.system == "Linux" and hasattr(platform, "freedesktop_os_release"):
+         distrib = platform.freedesktop_os_release()
+     else:
+         distrib = {"NAME": "Unknown"}
