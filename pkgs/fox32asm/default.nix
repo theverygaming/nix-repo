@@ -23,6 +23,8 @@ rustPlatform.buildRustPackage (finalAttrs: {
     # These two fail with "Error: Label "get_rom_version" was defined more than once!" and it's a known issue
     "--skip=tests::hello_world"
     "--skip=tests::multitasking"
+    # cputest is uhm NOT reproducible :sob: "failed to lock mutex; possibly poisoined: PoisonError { .. }" see fox32 discord for more info on that
+    "--skip=tests::cputest"
   ];
 
   cargoHash = "sha256-lPb6hGlAHQh78D1ElL+pznj5P4+BNrOdEZKbbVwrSLU=";
