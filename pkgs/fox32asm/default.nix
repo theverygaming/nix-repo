@@ -28,4 +28,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
   ];
 
   cargoHash = "sha256-lPb6hGlAHQh78D1ElL+pznj5P4+BNrOdEZKbbVwrSLU=";
+
+  meta.broken = true; # the fucking fetchFromGitHub hash changes like daily or sum shit, I'm NOT dealing with this rn god
 })
