@@ -4,5 +4,5 @@ index 11a33cf..537ab77 100644
 +++ b/cutekit/requirements.txt
 @@ -1,2 +1,2 @@
 -graphviz ~= 0.20.1
-+graphviz ~= 0.21
++graphviz>=0.20.1,<0.22
  dataclasses-json ~= 0.6.4
