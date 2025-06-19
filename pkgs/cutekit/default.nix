@@ -18,12 +18,13 @@ buildPythonApplication {
   src = fetchFromGitHub {
     owner = "cute-engineering";
     repo = "cutekit";
-    rev = "49383cdf2c8711a5681024b0ad01d0e8be529fcb";
-    sha256 = "sha256-6HnV5Kb0VMh5STrQW+IN1yhcs2jyAEJOrDroWSEeqz8=";
+    rev = "14bdecb5585b6f476a956a6c8a19a4a84573791e";
+    sha256 = "sha256-BVsEOd02k9jaqFz1W+089V9VVe1jMYsf2avIz8qNvpM=";
   };
 
   patches = [
     ./nixos-support.patch
+    ./requirements.patch
   ];
 
   propagatedBuildInputs = [
