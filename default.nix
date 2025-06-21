@@ -40,7 +40,9 @@ rec {
   fox32asm = pkgs.callPackage ./pkgs/fox32asm { };
 
   cutekit = pkgs.python3Packages.callPackage ./pkgs/cutekit { };
-  paper-muncher = pkgs.callPackage ./pkgs/paper-muncher { inherit cutekit; };
+  buildCutekitPackage = pkgs.callPackage ./pkgs/buildCutekitPackage { inherit cutekit; };
+
+  paper-muncher = pkgs.callPackage ./pkgs/paper-muncher { inherit buildCutekitPackage; };
 
   kicadAddons = pkgs.recurseIntoAttrs {
     jlcpcb-tools = pkgs.kicad.callPackage ./pkgs/kicadAddons/jlcpcb-tools { };
