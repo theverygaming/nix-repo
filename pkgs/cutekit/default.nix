@@ -18,8 +18,8 @@ buildPythonApplication {
   src = fetchFromGitHub {
     owner = "cute-engineering";
     repo = "cutekit";
-    rev = "14bdecb5585b6f476a956a6c8a19a4a84573791e";
-    sha256 = "sha256-BVsEOd02k9jaqFz1W+089V9VVe1jMYsf2avIz8qNvpM=";
+    rev = "676bc7ffb26a605dd51541c731b13ad492f45777";
+    sha256 = "sha256-OrKhOC24ZQ9e3wljm90iIuLrGU+FsgmQlXy5q7cD930=";
   };
 
   patches = [
