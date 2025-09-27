@@ -16,7 +16,11 @@ stdenv.mkDerivation (finalAttrs: {
   version = "0.9p";
 
   src = fetchurl {
-    url = "http://abelian.org/vlfrx-tools/vlfrx-tools-${finalAttrs.version}.tgz";
+    urls = [
+      # abelian.org is no longer online - Paul, who ran it, sadly passed away...
+      # "http://abelian.org/vlfrx-tools/vlfrx-tools-${finalAttrs.version}.tgz"
+      "https://web.archive.org/web/20250922092648/https://abelian.vvsindia.com/vlfrx-tools/vlfrx-tools-${finalAttrs.version}.tgz"
+    ];
     sha256 = "sha256-tq9k1tnP6bmkqOdY1OkXqzvowRkEu71OC9D/vLPyjtc=";
   };
 

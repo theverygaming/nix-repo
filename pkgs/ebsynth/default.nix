@@ -15,7 +15,11 @@ stdenv.mkDerivation (finalAttrs: {
 
   # use finalAttrs.version when you finally figured out how to pin it
   src = fetchurl {
-    url = "http://abelian.org/ebnaut/ebsynth.c";
+    urls = [
+      # abelian.org is no longer online - Paul, who ran it, sadly passed away...
+      # "http://abelian.org/ebnaut/ebsynth.c"
+      "https://web.archive.org/web/20250922113424/https://abelian.vvsindia.com/ebnaut/ebsynth.c"
+    ];
     sha256 = "sha256-CnR6Apj4QCFkKhEL1IlX1KEINOB1dfoT53SAiTOWKmc=";
   };
 
