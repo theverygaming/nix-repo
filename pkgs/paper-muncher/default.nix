@@ -20,12 +20,12 @@ llvm20buildCutekitPackage (finalAttrs: {
   src = fetchFromGitHub {
     owner = "odoo";
     repo = "paper-muncher";
-    rev = "a6a82f2806318fac885d2220965624dd22f188ac";
-    sha256 = "sha256-oAYuUINxhRiBNjwzgzhQ9tBZHAXXeX8nSY9xKpPeO7U=";
+    rev = "a336659ca32919cea6b410f9b2aab9862b58bbe2";
+    sha256 = "sha256-eiSm2OfuVc6Y3nuMae+HoyobgzD0XNwcql48fPWeaUI=";
   };
 
   ckComponent = "paper-muncher";
-  ckDepsHash = "sha256-AIAV3kPEiu8TpfC1Ed0GVAhu+wv62U8wXwdvi4EJnUA=";
+  ckDepsHash = "sha256-FlorkF2MXkRgrxwfSWLQq6tGBw+JV/lAV3aOpI0Wwf8=";
 
   buildInputs = [
     liburing
