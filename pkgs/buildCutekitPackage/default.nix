@@ -51,11 +51,13 @@ lib.extendMkDerivation {
           cacert
         ];
 
+        # we remove all git hooksfrom the sources because they would get patched and then contain nix store paths
+        # which is not allowed for fixed-output derivations..
         buildPhase = ''
           runHook preBuild
 
-          HOME="$(mktemp -d)" IN_NIX_SHELL=":3" cutekit model install
-          find .cutekit/extern -type d -name .git -exec rm -rf {} +
+          HOME="$(mktemp -d)" IN_NIX_SHELL=":3" cutekit install
+          find .cutekit/extern -type d -path "*/.git/hooks" -exec rm -rf {} +
 
           runHook postBuild
         '';
@@ -76,15 +78,16 @@ lib.extendMkDerivation {
         ninja
         llvmPackages.clang-tools # https://github.com/NixOS/nixpkgs/issues/214945 - clang-scan-deps is not wrapped and will fail to find the stdlib otherwise!
         jq
+        git
       ] ++ nativeBuildInputs;
 
-      preBuild = ''
+      buildPhase = ''
         export CUTEKIT_HOME=$(mktemp -d)
         mkdir -p $CUTEKIT_HOME/.cutekit/
         ln -s ${cutekitExternDeps} $CUTEKIT_HOME/.cutekit/extern
-      '';
+        export GIT_CONFIG_GLOBAL="$(mktemp)"
+        git config --file "$GIT_CONFIG_GLOBAL" --add safe.directory '*'
 
-      buildPhase = ''
         runHook preBuild
 
         HOME="$CUTEKIT_HOME" IN_NIX_SHELL=":3" cutekit build --release --props:prefix=$out ${ckComponent}
@@ -95,7 +98,7 @@ lib.extendMkDerivation {
       installPhase = ''
         runHook preInstall
 
-        HOME="$CUTEKIT_HOME" IN_NIX_SHELL=":3" cutekit install --release --prefix=$out --sysroot=/ ${ckComponent}
+        HOME="$CUTEKIT_HOME" IN_NIX_SHELL=":3" cutekit package --release --prefix=$out --sysroot=/ ${ckComponent}
 
         runHook postInstall
       '';
