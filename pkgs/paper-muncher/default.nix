@@ -25,7 +25,7 @@ llvm20buildCutekitPackage (finalAttrs: {
   };
 
   ckComponent = "paper-muncher";
-  ckDepsHash = "sha256-PezRsHFUOmZs+36Se1v1alzX+nqixfHf1jl9a59rj4I=";
+  ckDepsHash = ""; # FIXME: this fixed output aint so fixed rn unfortunately :broken_heart:
 
   buildInputs = [
     liburing
