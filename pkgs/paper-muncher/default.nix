@@ -20,12 +20,12 @@ llvm20buildCutekitPackage (finalAttrs: {
   src = fetchFromGitHub {
     owner = "odoo";
     repo = "paper-muncher";
-    rev = "a336659ca32919cea6b410f9b2aab9862b58bbe2";
-    sha256 = "sha256-eiSm2OfuVc6Y3nuMae+HoyobgzD0XNwcql48fPWeaUI=";
+    rev = "06f403d4184872f8154ef8ba29fe449d24d13ab6";
+    sha256 = "sha256-TeTULFodFR9mPj1iPNNicHHxfInKjCYFtkSHJtUf0ao=";
   };
 
   ckComponent = "paper-muncher";
-  ckDepsHash = "sha256-FlorkF2MXkRgrxwfSWLQq6tGBw+JV/lAV3aOpI0Wwf8=";
+  ckDepsHash = "sha256-PezRsHFUOmZs+36Se1v1alzX+nqixfHf1jl9a59rj4I=";
 
   buildInputs = [
     liburing
@@ -51,7 +51,7 @@ llvm20buildCutekitPackage (finalAttrs: {
     </html>
     EOF
 
-    $out/bin/paper-muncher --unsecure print $TMPDIR/test.html -o $TMPDIR/test.pdf
+    $out/bin/paper-muncher $TMPDIR/test.html -o $TMPDIR/test.pdf
     grep "Powered By Karm PDF" $TMPDIR/test.pdf
 
     runHook postInstallCheck
