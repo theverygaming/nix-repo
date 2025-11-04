@@ -44,7 +44,7 @@ rec {
 
   paper-muncher = pkgs.callPackage ./pkgs/paper-muncher { inherit buildCutekitPackage; };
 
-  kicadAddons = pkgs.recurseIntoAttrs {
+  kicadAddons = pkgs.lib.recurseIntoAttrs {
     jlcpcb-tools = pkgs.kicad.callPackage ./pkgs/kicadAddons/jlcpcb-tools { };
   };
 }
