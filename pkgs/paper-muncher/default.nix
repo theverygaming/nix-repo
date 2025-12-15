@@ -56,4 +56,6 @@ llvm20buildCutekitPackage (finalAttrs: {
 
     runHook postInstallCheck
   '';
+
+  meta.broken = true;
 })
