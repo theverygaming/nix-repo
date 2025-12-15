@@ -8,7 +8,7 @@
 
 buildPythonApplication {
   pname = "cutekit";
-  version = "nightly";
+  version = "0.10.7";
   pyproject = true;
 
   build-system = [
@@ -18,8 +18,8 @@ buildPythonApplication {
   src = fetchFromGitHub {
     owner = "cute-engineering";
     repo = "cutekit";
-    rev = "437084b9f917f56031b716f3306b210fca6b8e4f";
-    sha256 = "sha256-+m/CcECzTwkuxeVo4XgwoBEGBD16/9Y4IKWrtaarCpo=";
+    rev = "eb95ee85f77603db5dda57f8290459dafbc0d171";
+    sha256 = "sha256-K8VshFM+2mWPk5FamDZqmJOYIaAdc7Qa9uL3YimMn2g=";
   };
 
   patches = [
