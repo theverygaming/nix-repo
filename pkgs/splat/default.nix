@@ -44,8 +44,14 @@ stdenv.mkDerivation (finalAttrs: {
     gtest
   ];
 
-  doInstallCheck = true;
-  installCheckPhase = ''
-    $out/bin/splat_tests
+  doCheck = true;
+  checkPhase = ''
+    runHook preCheck
+    ./splat_tests
+    runHook postCheck
+  '';
+
+  postInstall = ''
+    rm $out/bin/splat_tests
   '';
 })
