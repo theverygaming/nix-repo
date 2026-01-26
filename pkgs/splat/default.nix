@@ -43,4 +43,9 @@ stdenv.mkDerivation (finalAttrs: {
     gdal
     gtest
   ];
+
+  doInstallCheck = true;
+  installCheckPhase = ''
+    $out/bin/splat_tests
+  '';
 })
