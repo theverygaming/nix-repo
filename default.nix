@@ -47,4 +47,6 @@ rec {
   kicadAddons = pkgs.lib.recurseIntoAttrs {
     jlcpcb-tools = pkgs.kicad.callPackage ./pkgs/kicadAddons/jlcpcb-tools { };
   };
+
+  splat = pkgs.callPackage ./pkgs/splat { };
 }

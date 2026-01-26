@@ -1,0 +1,14 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 15ab71d..adc9e5a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -131,6 +131,9 @@ endif()
+ # Installation
+ install(TARGETS splat DESTINATION bin)
+ 
++# utils
++add_subdirectory("utils")
++
+ # ==============================================================================
+ # Testing Configuration
+ # ==============================================================================
