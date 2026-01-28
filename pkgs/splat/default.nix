@@ -1,3 +1,4 @@
+# NOTE: find STRM3 data at: https://srtm.fasma.org/ source: https://github.com/rapomon/srtm-elevation
 {
   lib,
   stdenv,
